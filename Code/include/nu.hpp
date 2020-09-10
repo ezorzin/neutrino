@@ -10,8 +10,8 @@
 #define nu_hpp
 
 // INCLUDES:
-  #include "algebraic_topology.hpp"                                                                 // Neutrino's mesh context declarations.
-  #include "opengl.hpp"                                                                             // Neutrino's OpenGL context declarations.
-  #include "opencl.hpp"                                                                             // Neutrino's OpenCL context declarations.
+#include "mesh.hpp"                                                                                 // Neutrino's mesh context declarations.
+#include "opengl.hpp"                                                                               // Neutrino's OpenGL context declarations.
+#include "opencl.hpp"                                                                               // Neutrino's OpenCL context declarations.
 
 #endif
