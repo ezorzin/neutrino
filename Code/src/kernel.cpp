@@ -419,7 +419,7 @@ void kernel::setarg
     glBindBuffer
     (
      GL_SHADER_STORAGE_BUFFER,                                                                       // SSBO target.
-     loc_data->ssbo                                                                                  // SSBO to bind.
+     0                                                                                               // SSBO to bind.
     );
 
     glFinish ();                                                                                     // Waiting for OpenGL to finish...
@@ -448,13 +448,11 @@ void kernel::setarg
                           &loc_error                                                                 // Error code.
                          );
     }
-    std::cout << "pippo" << std::endl;
+
     baseline->check_error (loc_error);                                                               // Checking returned error code...
-    std::cout << "pippo" << std::endl;
     loc_data->ready = true;                                                                          // Setting "ready" flag...
   }
 
-  std::cout << "pippo" << std::endl;
   loc_error = clSetKernelArg
               (
                kernel_id,                                                                            // Kernel id.
@@ -462,9 +460,8 @@ void kernel::setarg
                sizeof(cl_mem),                                                                       // Data size.
                &loc_data->buffer                                                                     // Data value.
               );
-  std::cout << "pippo" << std::endl;
+
   baseline->check_error (loc_error);                                                                 // Checking returned error code...
-  std::cout << "pippo" << std::endl;
   baseline->done ();                                                                                 // Printing message...
 }
 

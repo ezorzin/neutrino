@@ -625,7 +625,7 @@ void queue::write
     baseline->error ("Layout index mismatch!");                                                     // Printing message...
     exit (EXIT_FAILURE);                                                                            // Exiting...
   }
-
+  std::cout << "pippo" << std::endl;
   // Writing OpenCL buffer:
   loc_error = clEnqueueWriteBuffer
               (
@@ -641,8 +641,9 @@ void queue::write
               );
 
   baseline->check_error (loc_error);
-
+  std::cout << "pippo" << std::endl;
   clFinish (queue_id);                                                                              // Waiting for OpenCL to finish...
+  std::cout << "pippo" << std::endl;
 };
 
 void queue::write
