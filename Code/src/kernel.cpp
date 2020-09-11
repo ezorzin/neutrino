@@ -435,7 +435,6 @@ void kernel::setarg
                           &loc_error                                                                 // Returned error.
                          );
     }
-
     else
     {
       // Creating OpenCL memory buffer:
@@ -449,11 +448,13 @@ void kernel::setarg
                           &loc_error                                                                 // Error code.
                          );
     }
-
+    std::cout << "pippo" << std::endl;
     baseline->check_error (loc_error);                                                               // Checking returned error code...
+    std::cout << "pippo" << std::endl;
     loc_data->ready = true;                                                                          // Setting "ready" flag...
   }
 
+  std::cout << "pippo" << std::endl;
   loc_error = clSetKernelArg
               (
                kernel_id,                                                                            // Kernel id.
@@ -461,8 +462,9 @@ void kernel::setarg
                sizeof(cl_mem),                                                                       // Data size.
                &loc_data->buffer                                                                     // Data value.
               );
-
+  std::cout << "pippo" << std::endl;
   baseline->check_error (loc_error);                                                                 // Checking returned error code...
+  std::cout << "pippo" << std::endl;
   baseline->done ();                                                                                 // Printing message...
 }
 
