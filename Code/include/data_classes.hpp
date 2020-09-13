@@ -422,9 +422,13 @@ public:
   /// the memory allocation on the client GPU.
   cl_mem    buffer;                                                                                 ///< @brief **Data memory buffer.**
 
+  /// @details [OpenGL data Vertex Array Object]
+  /// (https://www.khronos.org/opengl/wiki/Vertex_Specification). Internally used by Neutrino.
+  GLuint    vao;                                                                                    ///< @brief **OpenGL data Vertex Array Object.**
+
   /// @details [OpenGL data Vertex Buffer Object]
-  /// (https://www.khronos.org/opengl/wiki/Shader_Storage_Buffer_Object). Internally used by Neutrino.
-  GLuint    ssbo;                                                                                   ///< @brief **OpenGL data Shader Storage Buffer Object.**
+  /// (https://www.khronos.org/opengl/wiki/Vertex_Specification). Internally used by Neutrino.
+  GLuint    vbo;                                                                                    ///< @brief **OpenGL data Vertex Buffer Object.**
 
   /// @details Size, in numbers of elements, of the user's data to be allocated as data storage.
   size_t    size;                                                                                   ///< @brief **Data size [#].**

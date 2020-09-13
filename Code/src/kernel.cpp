@@ -389,37 +389,64 @@ void kernel::setarg
 
   if(!loc_data->ready)
   {
-    // Generating SSBO:
-    glGenBuffers
+    // Generating VAO...
+    glGenVertexArrays
     (
-     1,                                                                                              // Number of SSBOs to generate.
-     &loc_data->ssbo                                                                                 // SSBOs array.
+     1,                                                                                              // Number of VAOs to generate.
+     &loc_data->vao                                                                                  // VAOs array.
     );
 
-    // Binding SSBO:
+    // Binding node VAO...
+    glBindVertexArray
+    (
+     loc_data->vao                                                                                   // VAOs array.
+    );
+
+    // Generating VBO:
+    glGenBuffers
+    (
+     1,                                                                                              // Number of VBOs to generate.
+     &loc_data->vbo                                                                                  // VBOs array.
+    );
+
+    // Binding VBO:
     glBindBuffer
     (
-     GL_SHADER_STORAGE_BUFFER,                                                                       // SSBO target.
-     loc_data->ssbo                                                                                  // SSBO to bind.
+     GL_ARRAY_BUFFER,                                                                                // VBO target.
+     loc_data->vbo                                                                                   // VBO to bind.
     );
 
     // Creating and initializing a buffer object's data store:
     glBufferData
     (
-     GL_SHADER_STORAGE_BUFFER,                                                                       // SSBO target.
-     sizeof(GLfloat)*loc_data->size,                                                                 // SSBO size.
-     loc_data->data,                                                                                 // SSBO data.
-     GL_DYNAMIC_DRAW                                                                                 // SSBO usage.
+     GL_ARRAY_BUFFER,                                                                                // VBO target.
+     sizeof(GLfloat)*loc_data->size,                                                                 // VBO size.
+     loc_data->data,                                                                                 // VBO data.
+     GL_DYNAMIC_DRAW                                                                                 // VBO usage.
     );
 
-    // Binding SSBO to an indexed buffer target:
-    glBindBufferBase (GL_SHADER_STORAGE_BUFFER, loc_layout_index, loc_data->ssbo);                   // Binding SSBO...
+    // Specifying the format for attribute in vertex shader:
+    glVertexAttribPointer
+    (
+     loc_layout_index,                                                                               // VAO index.
+     1,                                                                                              // VAO's number of components.
+     GL_FLOAT,                                                                                       // Data type.
+     GL_FALSE,                                                                                       // Not using normalized numbers.
+     0,                                                                                              // Data stride.
+     0                                                                                               // Data offset.
+    );
 
-    // Binding SSBO:
+    // Enabling attribute in vertex shader:
+    glEnableVertexAttribArray
+    (
+     loc_layout_index                                                                                // VAO index.
+    );
+
+    // Binding VBO:
     glBindBuffer
     (
-     GL_SHADER_STORAGE_BUFFER,                                                                       // SSBO target.
-     0                                                                                               // SSBO to bind.
+     GL_ARRAY_BUFFER,                                                                                // VBO target.
+     loc_data->vbo                                                                                   // VBO to bind.
     );
 
     glFinish ();                                                                                     // Waiting for OpenGL to finish...
@@ -431,10 +458,11 @@ void kernel::setarg
                          (
                           baseline->context_id,                                                      // OpenCL context.
                           CL_MEM_READ_WRITE,                                                         // Memory flags.
-                          loc_data->ssbo,                                                            // SSBO.
+                          loc_data->vbo,                                                             // VBO.
                           &loc_error                                                                 // Returned error.
                          );
     }
+
     else
     {
       // Creating OpenCL memory buffer:
