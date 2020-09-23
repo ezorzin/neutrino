@@ -66,7 +66,10 @@ private:
   void set_shader (
                    shader* loc_shader,                                                              ///< Shader.
                    float   view_matrix[16],                                                         ///< View matrix.
-                   float   projection_matrix[16]                                                    ///< Projection matrix.
+                   float   projection_matrix[16],                                                   ///< Projection matrix.
+                   int     framebuffer_size_x,                                                      ///< Window x-size [px].
+                   int     framebuffer_size_y,                                                      ///< Window y-size [px].
+                   float   aspect_ratio                                                             ///< Window aspect ratio.
                   );
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////
